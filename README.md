@@ -2,7 +2,7 @@
 
 ## Este proyecto se enfoca en analizar la distribución de la carencia en recursos básicos y servicios dentro de México a nivel localidad, enfocandose principalmente en la divisiòn entre diferentes grupos indígenas. Igualmente, Se pretende comparar el cambio al acceso de estos servicios del 2010 al 2020. Finalmente, se creó un algoritmo que categoriza las localidades más vulnerables para la creación de una estrategia para invertir recursos a los que más lo necesiten. 
 
-### Agregamos los datos del 2010: (en R)
+### Agregamos los datos del 2010 (en R):
 
 ```R
 
@@ -10,7 +10,7 @@ install.packages(ggplot2)
 
 library("ggplot2")
 
-# importamos los df: 
+# importamos los diferentes df: 
 
 censo_general <- na.omit(read.csv("/Users/vottov/Desktop/Data Analysis & python /Projecto bueno /tablas listas /CSV finales/Censo general.csv"))
 geo_datos <- na.omit(read.csv("/Users/vottov/Desktop/Data Analysis & python /Projecto bueno /tablas listas /CSV finales/Datos geográficos.csv"))
@@ -23,14 +23,18 @@ head(servicios)
 attach(servicios)
 
 ```
-### Ahora, arreglamos los nombres de las columnas (Python): 
+### Ahora, arreglamos los nombres de las columnas creadas en R (Python): 
 
 ```Python
 import pandas as pd
 import numpy as np
 
+# importamos los datos creados en R:
+
 df_2010 = pd.read_csv('DF_Final.csv')
 df_2010.dtypes
+
+# creamos nombres con estandar PEP 8:
 
 nombres_nuevos = {
     'ID_.EST.MUN.LOC.':'id_est_mun_loc',
@@ -176,9 +180,15 @@ def hacer_porcentajes(sin,con,df,nombre):
   return pd.DataFrame(df[nombre])
 
 
+# porcentaje de casas sin agua:
+
 hacer_porcentajes(df['VPH_NODREN'], df['VPH_DRENAJ'], df, 'porcentaje_de_casas_sin_drenaje_2020')
 
+# porcentaje de casas sin luz:
+
 hacer_porcentajes(df['VPH_S_ELEC'], df['VPH_C_ELEC'], df, 'porcentaje_de_casas_sin_luz_2020')
+
+# porcentaje de casas con piso de tierra:
  
 hacer_porcentajes(df['VPH_PISOTI'], df['VPH_PISODT'], df, 'porcentaje_de_casas_con_piso_de_tierra_2020')
 
@@ -187,11 +197,19 @@ def hacer_porcentajes_simplificado(fraccion,total,df,nombre):
   df[nombre] = porcentaje
   return pd.DataFrame(df[nombre])
 
+# porcentaje de casas sin agua:
+
 hacer_porcentajes(df['VPH_AGUAFV'], df['VIVPAR_HAB'], df, 'porcentaje_de_casas_sin_agua_2020')
+
+# porcentaje de casas s:
 
 hacer_porcentajes_simplificado(df['P3YM_HLI'],df['POBTOT'],df,'porcentaje_de_hablantes_indigena_2020')
 
+# porcentaje de casas sin agua:
+
 hacer_porcentajes_simplificado(df['P3HLINHE'],df['POBTOT'],df,'porcentaje_de_hablantes_indigena_y_no_esp_2020')
+
+# porcentaje de casas sin agua:
 
 hacer_porcentajes_simplificado(df['P3HLI_HE'],df['POBTOT'],df,'porcentaje_de_hablantes_bilingues_2020')
 
