@@ -2,7 +2,7 @@
 
 ## Este proyecto se enfoca en analizar la distribución de la carencia en recursos básicos y servicios dentro de México a nivel localidad, enfocandose principalmente en la divisiòn entre diferentes grupos indígenas. Igualmente, Se pretende comparar el cambio al acceso de estos servicios del 2010 al 2020. Finalmente, se creó un algoritmo que categoriza las localidades más vulnerables para la creación de una estrategia para invertir recursos a los que más lo necesiten. 
 
-### agregamos los datos del 2010: (en R)
+### Agregamos los datos del 2010: (en R)
 
 ```R
 
@@ -23,7 +23,7 @@ head(servicios)
 attach(servicios)
 
 ```
-### Ahora, arreglamos los nombres de las columnas en Python: 
+### Ahora, arreglamos los nombres de las columnas (Python): 
 
 ```Python
 import pandas as pd
@@ -65,8 +65,9 @@ df_2010.to_csv('datos_2010_arreglados.csv')
 
 ````
 
-###importamos los datos del 2020 (que fueron publicados a la mitad del curso)
-````R
+### Importamos los datos del 2020 ya que fueron publicados a la mitad del curso (Python):
+
+````Python
 
 df_2020 = pd.read_csv('conjunto_de_datos_iter_00CSV20.csv')
 
@@ -106,7 +107,7 @@ df_2020_sin_resumen_select_sin_null['ALTITUD'] = df_2020_sin_resumen_select_sin_
 (df_2020_sin_resumen_select_sin_null['ALTITUD'] == '00-1').value_counts()
 
 `````
-### pasamos los datos a numeric: 
+### pasamos los datos a numeric (Python): 
 
 ````Python
 df_2020_sin_resumen_select_sin_null_float = df_2020_sin_resumen_select_sin_null
@@ -130,7 +131,7 @@ for i in range(0,(len(lista_numeric))):
 df_2020_sin_resumen_select_sin_null_float.dtypes  
 
 ````
-### creamos una función para sacar el porcentaje de casas sin ciertos servicios, ya que sòlo indica el número de casas sin servicio por localidad:
+### Creamos una función para sacar el porcentaje de casas sin ciertos servicios, ya que sòlo indica el número de casas sin servicio por localidad:
 
 ```R
 
