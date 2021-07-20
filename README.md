@@ -131,7 +131,7 @@ for i in range(0,(len(lista_numeric))):
 df_2020_sin_resumen_select_sin_null_float.dtypes  
 
 ````
-### Creamos una función para sacar el porcentaje de casas sin ciertos servicios, ya que sòlo indica el número de casas sin servicio por localidad:
+### Creamos una función para sacar el porcentaje de casas sin ciertos servicios, ya que sòlo indica el número de casas sin servicio por localidad para los datos del 2010 (en R):
 
 ```R
 
@@ -163,3 +163,36 @@ viviendas <- porcentaje(viviendas,viv_ocup_habit_piso_tierra,viv_ocup_habit_piso
 
 ```
 
+### Similarmente creamos una función para obtener el porcentaje de casas sin servicio para 2020 en Python (en Python):
+
+```Python
+
+df = df_2020_sin_resumen_select_sin_null_float
+
+def hacer_porcentajes(sin,con,df,nombre):
+  total = sin + con
+  porcentaje = (sin/total)*100
+  df[nombre] = porcentaje
+  return pd.DataFrame(df[nombre])
+
+
+hacer_porcentajes(df['VPH_NODREN'], df['VPH_DRENAJ'], df, 'porcentaje_de_casas_sin_drenaje_2020')
+
+hacer_porcentajes(df['VPH_S_ELEC'], df['VPH_C_ELEC'], df, 'porcentaje_de_casas_sin_luz_2020')
+ 
+hacer_porcentajes(df['VPH_PISOTI'], df['VPH_PISODT'], df, 'porcentaje_de_casas_con_piso_de_tierra_2020')
+
+def hacer_porcentajes_simplificado(fraccion,total,df,nombre):
+  porcentaje = (fraccion/total)*100
+  df[nombre] = porcentaje
+  return pd.DataFrame(df[nombre])
+
+hacer_porcentajes(df['VPH_AGUAFV'], df['VIVPAR_HAB'], df, 'porcentaje_de_casas_sin_agua_2020')
+
+hacer_porcentajes_simplificado(df['P3YM_HLI'],df['POBTOT'],df,'porcentaje_de_hablantes_indigena_2020')
+
+hacer_porcentajes_simplificado(df['P3HLINHE'],df['POBTOT'],df,'porcentaje_de_hablantes_indigena_y_no_esp_2020')
+
+hacer_porcentajes_simplificado(df['P3HLI_HE'],df['POBTOT'],df,'porcentaje_de_hablantes_bilingues_2020')
+
+´´´
