@@ -23,7 +23,7 @@ head(servicios)
 attach(servicios)
 
 ```
-### Ahora, arreglamos los nombres de las columnas e importamos los datos del 2020 (que fueron publicados a la mitad del curso): 
+### Ahora, arreglamos los nombres de las columnas en Python: 
 
 ```Python
 import pandas as pd
@@ -63,7 +63,10 @@ df_2010.dtypes
 
 df_2010.to_csv('datos_2010_arreglados.csv')
 
-## Agregamos los datos del 2020
+````
+
+###importamos los datos del 2020 (que fueron publicados a la mitad del curso)
+````R
 
 df_2020 = pd.read_csv('conjunto_de_datos_iter_00CSV20.csv')
 
@@ -102,8 +105,10 @@ df_2020_sin_resumen_select_sin_null = df_2020_sin_resumen_select.dropna(axis=0, 
 df_2020_sin_resumen_select_sin_null['ALTITUD'] = df_2020_sin_resumen_select_sin_null['ALTITUD'].replace('00-1', '0')
 (df_2020_sin_resumen_select_sin_null['ALTITUD'] == '00-1').value_counts()
 
-# pasamos los datos a numeric: 
+`````
+### pasamos los datos a numeric: 
 
+````Python
 df_2020_sin_resumen_select_sin_null_float = df_2020_sin_resumen_select_sin_null
 lista_numeric = ['ALTITUD',
                  'VIVPAR_HAB',
@@ -123,7 +128,8 @@ for i in range(0,(len(lista_numeric))):
   df_2020_sin_resumen_select_sin_null_float[lista_numeric[i]] = pd.to_numeric(df_2020_sin_resumen_select_sin_null_float[lista_numeric[i]],errors='coerce')
 
 df_2020_sin_resumen_select_sin_null_float.dtypes  
-```
+
+````
 ### creamos una función para sacar el porcentaje de casas sin ciertos servicios, ya que sòlo indica el número de casas sin servicio por localidad:
 
 ```R
