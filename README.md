@@ -1,6 +1,6 @@
 # Proyecto Final Bedu
 
-## Este proyecto se enfoca en analizar la distribución de la carencia en recursos básicos y servicios dentro de México a nivel localidad, enfocandose principalmente en la divisiòn entre diferentes grupos indígenas. 
+## Este proyecto se enfoca en analizar la distribución de la carencia en recursos básicos y servicios dentro de México a nivel localidad, enfocandose principalmente en la división entre diferentes grupos indígenas. 
 
 ## Igualmente, se pretende comparar el cambio al acceso de estos servicios del 2010 al 2020. 
 
@@ -80,6 +80,7 @@ lenguas_ind_censo_DF <- porcentaje2(lenguas_ind_censo_DF, Hablantes_leng_indig_y
 ````
 
 ### Después limpiamos las Dataframes con las columnas necesarias y las juntamos en una sola columna final (en R): 
+#### **Los ID de estas dataframes son una concatenación de el id de entidad, que continene 2 dígitos, el id de municipio que contiene 3 dígitos y el id de localidad que contiene 4 dígitos**
 
 ````R
 # Borramos las columnas que no vamos a usar de todas los DF:
@@ -320,6 +321,13 @@ rezago_2020 = rezago_2020.rename(columns=nombres_rezago_2020)
 
 ````
 
+### Ahora juntamos las tablas del 2010 y 2020 usando el id de localidad: 
 
+````Python
+
+df_2010_2020 = pd.merge(df_2010, df_2020_final, left_index=True, right_index=True)
+
+````
+### Listo! Ahora podemos empezar a hacer comparaciones estadísticas gráficas y buscar patrones en nuestra DF
 
 
