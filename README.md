@@ -80,7 +80,7 @@ lenguas_ind_censo_DF <- porcentaje2(lenguas_ind_censo_DF, Hablantes_leng_indig_y
 ````
 
 ### Después limpiamos las Dataframes con las columnas necesarias y las juntamos en una sola columna final (en R): 
-#### **Los ID de estas dataframes son una concatenación de el id de entidad, que continene 2 dígitos, el id de municipio que contiene 3 dígitos y el id de localidad que contiene 4 dígitos**
+#### *Los ID de estas dataframes son una concatenación de el id de entidad, que continene 2 dígitos, el id de municipio que contiene 3 dígitos y el id de localidad que contiene 4 dígitos. estas columnas ya estaban con este formato, más adelante se muestra la función para crear este ID compuesto para los datos del 2020*
 
 ````R
 # Borramos las columnas que no vamos a usar de todas los DF:
