@@ -151,21 +151,21 @@ porcentaje <- function(DF,col_sin,col_con,round,nom_col){
 
 # porcentae de casas sin agua:
 
-servicios <- porcentaje(servicios, vph_aguafv, vph_aguadv, 2, "casasSinAgua_x100")
+servicios <- porcentaje(servicios, vph_aguafv, vph_aguadv, 2, "porcentaje_de_casas_sin_agua_2010")
 
 # porcentae de casas sin electricidad: 
 
-servicios <- porcentaje(servicios, vph_s_elec, vph_c_elec, 2, "casasSinLuz_x100")
+servicios <- porcentaje(servicios, vph_s_elec, vph_c_elec, 2, "porcentaje_de_casas_sin_luz_2010")
 
 # porcentae de casas sin drenaje: 
 
-servicios <- porcentaje(servicios, vph_nodren, vph_drenaj, 2, "casasSinDrenaje_x100")
+servicios <- porcentaje(servicios, vph_nodren, vph_drenaj, 2, "porcentaje_de_casas_sin_drenaje_2010")
 
 attach(viviendas)
 
 # porcentaje de casas con piso de tierra:
 
-viviendas <- porcentaje(viviendas,viv_ocup_habit_piso_tierra,viv_ocup_habit_piso_no_tierra,2,"casasPisoTierra_x100")
+viviendas <- porcentaje(viviendas,viv_ocup_habit_piso_tierra,viv_ocup_habit_piso_no_tierra,2,"porcentaje_de_casas_con_piso_de_tierra_2020")
 
 ```
 
