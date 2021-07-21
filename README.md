@@ -83,9 +83,11 @@ df_2020['LOC'] = df_2020['LOC'].apply('{:0>4}'.format)
 
 df_2020['id_est_mun_loc'] = df_2020['ENTIDAD'].map(str) + df_2020['MUN'].map(str) + df_2020['LOC'].map(str)
 
+# el ID lo ponemos como index: 
+
 df_2020 = df_2020.set_index('id_est_mun_loc', drop=True)
 
-df_2020.tail()
+# Limpiamops los datos que contiene valores de resumen general y no datos de localidad: 
 
 df_2020_sin_resumen = df_2020[~df_2020['ENTIDAD'].str.contains('00')] 
 df_2020_sin_resumen = df_2020_sin_resumen[~df_2020['MUN'].str.contains('000')]
@@ -93,7 +95,7 @@ df_2020_sin_resumen = df_2020_sin_resumen[~df_2020['LOC'].str.contains('0000')]
 df_2020_sin_resumen = df_2020_sin_resumen[~df_2020['LOC'].str.contains('9999')]
 df_2020_sin_resumen = df_2020_sin_resumen[~df_2020['LOC'].str.contains('9998')]
 
-# seleccionamos sólamente las columnas necesarias y quitamos los * que se usaron como null en los datos vìrgenes
+# seleccionamos sólamente las columnas necesarias y quitamos los * que se usaron como null en los datos vírgenes
 
 df_2020_sin_resumen_select = df_2020_sin_resumen[['LONGITUD','LATITUD','ALTITUD','POBTOT',
                                                   'VIVTOT','VIVPAR_HAB','PRO_OCUP_C','P3YM_HLI',
@@ -169,7 +171,7 @@ viviendas <- porcentaje(viviendas,viv_ocup_habit_piso_tierra,viv_ocup_habit_piso
 
 ### Similarmente creamos una función para obtener el porcentaje de casas sin servicio para 2020 en Python (en Python):
 
-```Python
+````Python
 
 df = df_2020_sin_resumen_select_sin_null_float
 
@@ -213,4 +215,41 @@ hacer_porcentajes_simplificado(df['P3HLINHE'],df['POBTOT'],df,'porcentaje_de_hab
 
 hacer_porcentajes_simplificado(df['P3HLI_HE'],df['POBTOT'],df,'porcentaje_de_hablantes_bilingues_2020')
 
+````
+### Ahora Arreglamos los nombres faltantes de las columnas para la tabla del 2020 (Python):
+
+````Python
+
+df_2020_final = df[['LONGITUD',
+                    'LATITUD',
+                    'ALTITUD',
+                    'POBTOT',
+                    'VIVTOT',
+                    'VIVPAR_HAB',
+                    'PRO_OCUP_C',
+                    'porcentaje_de_casas_sin_drenaje_2020',
+                    'porcentaje_de_casas_sin_luz_2020',
+                    'porcentaje_de_casas_con_piso_de_tierra_2020',
+                    'porcentaje_de_casas_sin_agua_2020',
+                    'porcentaje_de_hablantes_indigena_2020',
+                    'porcentaje_de_hablantes_indigena_y_no_esp_2020',
+                    'porcentaje_de_hablantes_bilingues_2020'
+  ]]
+
+
+nombres_nuevos_2020 = {
+    'LONGITUD': 'Longitud_grados',
+    'LATITUD': 'latitud_grados',
+    'ALTITUD': 'altitud_2020',
+    'POBTOT': 'poblacion_total_2020',
+    'VIVTOT': 'viviendas_totales_2020',
+    'VIVPAR_HAB': 'total_de_viviendas_particulares_habitadas_2020',
+    'PRO_OCUP_C': 'promedio_de_ocupantes_por_cuarto_2020',
+}
+
+df_2020_final = df_2020_final.rename(columns=nombres_nuevos_2020)
+
 ´´´
+
+
+
