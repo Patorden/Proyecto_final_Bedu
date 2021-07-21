@@ -300,7 +300,26 @@ nombres_nuevos_2020 = {
 df_2020_final = df_2020_final.rename(columns=nombres_nuevos_2020)
 
 `````
-### 
+### Agregamos los datos de rezago social del 2020
+
+````Python
+
+rezago_2020 = pd.read_csv('rezago_2020.csv')
+
+rezago_2020.index = rezago_2020['Clave localidad'].astype(str)
+rezago_2020.index = rezago_2020['Clave localidad'].apply('{:0>9}'.format)
+
+rezago_2020 = rezago_2020.drop(columns=['Clave localidad'])
+
+nombres_rezago_2020 = {
+    'Índice de rezago social': 'indice_de_rezago_social_2020',
+    'Grado de rezago social': 'grado_de_rezago_social_2020',
+    'Lugar que ocupa en el contexto nacional': 'lugar_nacional_de_rezago_social_2020',
+}
+rezago_2020 = rezago_2020.rename(columns=nombres_rezago_2020)
+
+````
+
 
 
 
