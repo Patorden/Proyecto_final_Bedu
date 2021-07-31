@@ -321,7 +321,7 @@ rezago_2020 = rezago_2020.rename(columns=nombres_rezago_2020)
 
 ````
 
-### Ahora juntamos las tablas del 2010 y 2020 usando el id de localidad: 
+### Ahora juntamos las tablas del 2010 y 2020 usando el id de localidad y agregamos las regiones indígenas
 
 ````Python
 
@@ -329,5 +329,9 @@ df_2010_2020 = pd.merge(df_2010, df_2020_final, left_index=True, right_index=Tru
 
 ````
 ### Listo! Ahora podemos empezar a hacer comparaciones estadísticas gráficas y buscar patrones en nuestra DF
+
+### Primero veamos las distribnuciones del acceso ciertos servicios en 2010 por región indígena (R)
+
+**Podemos ver que las tegiones tarahuamras y garn nayar tienen desproporcionadamente menos acceso a agua y al drenaje, al igual que mayor rezago social y casas con piso de tierra **
 
 
