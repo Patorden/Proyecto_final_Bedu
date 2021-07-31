@@ -332,6 +332,9 @@ df_2010_2020 = pd.merge(df_2010, df_2020_final, left_index=True, right_index=Tru
 
 ### Primero veamos las distribnuciones del acceso ciertos servicios en 2010 por región indígena (R)
 
-**Podemos ver que las tegiones tarahuamras y garn nayar tienen desproporcionadamente menos acceso a agua y al drenaje, al igual que mayor rezago social y casas con piso de tierra **
+*Podemos ver que las tegiones tarahuamras y garn nayar tienen desproporcionadamente menos acceso a agua y al drenaje, al igual que mayor rezago social y casas con piso de tierra*
+
+### Ahora veamos
+
 
 
