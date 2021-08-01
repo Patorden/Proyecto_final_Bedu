@@ -465,7 +465,7 @@ plt.title('Cambio en el Índice de Rezago del 2010 al 2020\n por Región Indíge
 
 *aguí podemos ver que hubo más diferencia positiva (refiriendise a que aumentó) que negativo (decreció el rezago). Las mas afectadas son Tarahumara y Gran nayar, mientras que las localidades no indígenas tuvieron un aumento muy pequeño. Ottras regiones como LoscNáhuas de Veracrúz y Valles Centrales, decreció significativamente el rezago.*
 
-### Ahora, esta métrica de la diferencia de rezago del 2010 al 2020 nos va a servir más adelante para icluir la diferncia para seleccionar las localidades más vulnerables
+### Ahora, esta métrica de la diferencia de rezago del 2010 al 2020 nos va a servir más adelante para icluir la diferncia para seleccionar las localidades más vulnerables, así que se la aplicamos a todos nuestros registros: 
 
 ````Python 
 
