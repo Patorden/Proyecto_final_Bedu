@@ -574,8 +574,8 @@ comunidad_vul.groupby('comunidad_vulnerable')['comunidad_vulnerable'].value_coun
 
 `````
 
->comunidad_vulnerable  comunidad_vulnerable
-0                     0                       64894
-1                     1                        2741
+> comunidad_vulnerable  comunidad_vulnerable
+> 0                     0                       64894
+> 1                     1                        2741
 
 ### Hagamos una matríz de correlaciones entre las variables que selecc
