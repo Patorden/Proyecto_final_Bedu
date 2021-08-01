@@ -413,7 +413,54 @@ Hist_piso_tierra
 
 *Podemos ver que las tegiones tarahuamras y garn nayar tienen desproporcionadamente menos acceso a agua y al drenaje, al igual que mayor rezago social y casas con piso de tierra*
 
-### Ahora veamos
+### Ahora veamos la distribución del índice de rezago social del 2010 al 2020 (Python):
 
+````Python
+sns.set(style="darkgrid")
+sns.distplot(df_2010_2020_reg['indice_de_rezago_social_2020'],  kde=True, label='2020')
 
+sns.distplot(df_2010_2020_reg['indice_de_rezago_social_2010'], 
+             kde=True,label='2010')
 
+# Agregamos titulos y estilo a nuestra gráfica:
+
+plt.legend(prop={'size': 12});
+plt.title('Distribución del Índice de Rezago Social del 2010 al 2020',
+          size=26, family='monospace', weight=900, y=1.1)
+plt.xlabel('Índice de Rezago Social', size=16, family='monospace')
+plt.ylabel('Densidad', size=16, family='monospace')
+
+````
+*Podemos ver que aumentó la cantidad de viviendas en un grado de rezago medio, al igual que aumntó la cola superior (mas localidades con menos srevicios, y decreció la cola inferior, o se redujeron el número de localidades con muy poco rezago. Esto indica que ¨empeoró¨ el rezago social en méxico*
+
+### Veamos la diferencia del rezago social del 2010 al 2020 por región indígena:
+
+````Python
+
+# Primero aggarramos el promedio del índice de rezago social de ambos años y lo agrupamos por región indígena:
+
+rez_ind= df_2010_2020_reg.groupby('region_indigena')[['indice_de_rezago_social_2010', 'indice_de_rezago_social_2020']].mean()
+
+# hacemos una ecuación sencilla para obtener la diferencia entre ambos años:
+
+rez_ind['diferencia_rezago'] = (rez_ind['indice_de_rezago_social_2010'] - rez_ind['indice_de_rezago_social_2020']) * -1
+
+# ordenamos de menor a mayor:
+
+rez_ind = rez_ind.sort_values(by=['diferencia_rezago'])
+
+# finalmente graficamos en un histgrama la diferencia por región: 
+
+sns.figsize=(10,14)
+sns.axes_style("white")
+dif = sns.barplot(x=rez_ind.index, y=rez_ind['diferencia_rezago'], palette="vlag")
+
+dif.set_xticklabels(dif.get_xticklabels(),rotation = 90, family='monospace', weight=900);
+
+plt.xlabel('Región Indígena', size=16, family='monospace')
+plt.ylabel('Índice de Rezago', size=16, family='monospace')
+plt.title('Cambio en el Índice de Rezago del 2010 al 2020\n por Región Indígena', 
+          size=26, family='monospace', weight=900, y=1.1)
+````
+
+*aguí podemos ver que hubo más diferencia positiva (refiriendise a que aumentó) que negativo (decreció el rezago). Las mas afectadas son Tarahumara y Gran nayar, mientras que las localidades no indígenas tuvieron un aumento muy pequeño. Ottras regiones como LoscNáhuas de Veracrúz y Valles Centrales, decreció significativamente el rezago.*
