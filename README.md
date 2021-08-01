@@ -578,4 +578,6 @@ comunidad_vulnerable | comunidad_vulnerable
 0 | 64894
 1 | 2741
 
+*aquí podemos ver que las comunidades no vulnerables estan sobre representadas, casí 30 registros más que las vulnerables. En general esto haría que nuestro algoritmo hsesge los resultados, para nuestro caso, que sólo queremos encontrar las comunidades más vulnerables, nos conviene, así sólo selecciona lo más extremo.*
+
 ### Hagamos una matríz de correlaciones entre las variables que selecc
