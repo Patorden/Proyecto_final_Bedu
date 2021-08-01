@@ -489,7 +489,7 @@ aumentó en un {porcentaje_de_cambio_muy_alto}% en 2020, con {pob_rezago_muy_alt
 print(f'''Similarmente, la población en grado de rezago social alto en 2010 era {pob_rezago_alto_2010} y 
 aumentó en un {porcentaje_de_cambio_alto}% en 2020, con {pob_rezago_alto_2020} en esta categoría''')
 ````
-- [x] La población en grado de rezago social muy alto en 2010 era 140476 y 
+> La población en grado de rezago social muy alto en 2010 era 140476 y 
 aumentó en un 158.4% en 2020, con 362962 en esta categoría
-- [x] Similarmente, la población en grado de rezago social alto en 2010 era 1721015 y 
+> Similarmente, la población en grado de rezago social alto en 2010 era 1721015 y 
 aumentó en un 115.3% en 2020, con 3705725 en esta categoría
