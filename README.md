@@ -327,10 +327,84 @@ rezago_2020 = rezago_2020.rename(columns=nombres_rezago_2020)
 
 df_2010_2020 = pd.merge(df_2010, df_2020_final, left_index=True, right_index=True)
 
+region_ind = pd.read_csv('regiones índígenas.csv')
+
+# renombramos la columna del los id y regiín indígena:
+
+region_ind.id_est_mun_loc.names = ['id_est_mun_loc']
+region_ind = region_ind.rename({'REG_IND': 'region_indigena'}, axis=1)
+
+# formateamos los ID y los ponemos como index
+
+region_ind['id_est_mun_loc'] = region_ind['id_est_mun_loc'].apply('{:0>9}'.format)
+region_ind = region_ind.set_index('id_est_mun_loc')
+
+agredamos laa regiones indíegnas a nuesrta Df:
+
+df_2010_2020_reg = pd.merge(df_2010_2020, region_ind, left_index=True, right_index=True, how='left')
+
+# Los registros que se quedaron nulos, los llenamos con 'Localidades no indigenas' ya que no pertencecen a ninguna región indígena:
+
+df_2010_2020_reg['region_indigena'] = df_2010_2020_reg['region_indigena'].fillna('Localidades no indigenas')
+
 ````
 ### Listo! Ahora podemos empezar a hacer comparaciones estadísticas gráficas y buscar patrones en nuestra DF
 
 ### Primero veamos las distribnuciones del acceso ciertos servicios en 2010 por región indígena (R)
+
+`````R
+
+Hist_sin_Rezago <- ggplot(Data.reg, aes(x = reorder(REG_IND, Indice.de.rezago.social, fun = mean), 
+                     y = Indice.de.rezago.social)) + 
+  coord_flip() +
+  geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
+  ggtitle("Rezago social por región indígena") +
+  xlab("Región Indígena") +
+  ylab("Dispersión de rezago social") +
+  theme_linedraw() + 
+  theme(text=element_text(size=10, family="Courier", face = "bold"))
+
+# Acceso al agua por región indígena 
+
+Hist_sin_Agua <- ggplot(Data.reg, aes(x = reorder(REG_IND, casasSinAgua_x100, fun = mean), 
+                     y = casasSinAgua_x100)) + 
+  coord_flip() +
+  geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
+  ggtitle("Acceso al agua por región indígena") +
+  xlab("Región Indígena") +
+  ylab("Porcentaje de viviendas por localidad \nsin acceso al agua entubada") +
+  theme_linedraw() + 
+  theme(text=element_text(size=10, family="Courier", face = "bold"))
+
+# Acceso a luz eléctrica por región indígena 
+
+Hist_sin_Luz <- ggplot(Data.reg, aes(x = reorder(REG_IND, casasSinLuz_x100, fun = mean), 
+                     y = casasSinLuz_x100)) + 
+  coord_flip() +
+  geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
+  ggtitle("Acceso a luz eléctrica por región indígena") +
+  xlab("Región Indígena") +
+  ylab("Porcentaje de viviendas por localidad \nsin acceso a luz eléctrica") +
+  theme_linedraw() + 
+  theme(text=element_text(size=10, family="Courier", face = "bold"))
+
+# viviendas con piso de tierra por región indígena: 
+
+Hist_piso_tierra <- ggplot(Data.reg, aes(x = reorder(REG_IND, casasPisoTierra_x100, fun = mean), 
+                                     y = casasPisoTierra_x100)) + 
+  coord_flip() +
+  geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
+  ggtitle("Viviendas con piso de tierra por región indígena") +
+  xlab("Región Indígena") +
+  ylab("Porcentaje de viviendas por \n localidad con piso de tierra") +
+  theme_linedraw() + 
+  theme(text=element_text(size=10, family="Courier", face = "bold"))
+
+Hist_sin_Agua
+Hist_sin_Luz
+Hist_sin_Rezago
+Hist_piso_tierra
+`````
 
 *Podemos ver que las tegiones tarahuamras y garn nayar tienen desproporcionadamente menos acceso a agua y al drenaje, al igual que mayor rezago social y casas con piso de tierra*
 
