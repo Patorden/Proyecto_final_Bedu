@@ -580,4 +580,43 @@ comunidad_vulnerable | comunidad_vulnerable
 
 *aquí podemos ver que las comunidades no vulnerables estan sobre representadas, casí 30 registros más que las vulnerables. En general esto haría que nuestro algoritmo hsesge los resultados, para nuestro caso, que sólo queremos encontrar las comunidades más vulnerables, nos conviene, así sólo selecciona lo más extremo.*
 
-### Hagamos una matríz de correlaciones entre las variables que selecc
+### AHora, hagamos una serie de boxplots con varias variables comparando los dos grupos seleccionados, previendo lo que 'vería' el algoritmo para tomar una decisión de si es vulnerable o no. Igual no ayudará a ver si las variables tienen una diferencia estadística suficiente
+
+````Python
+
+import matplotlib.pyplot as plt
+
+sns.set(rc={'figure.figsize':(15,15)})
+sns.set_style("darkgrid")
+#sns.
+fig, ax =plt.subplots(3,2, constrained_layout=True)
+
+
+
+sns.boxenplot(x='region_indigena', y='indice_de_rezago_social_2020', data=comunidad_vul, ax = ax[0,0])
+ax[0, 0].set(xlabel='', ylabel='índice de Rezago\nSocial 2020', 
+             title='Distribución del Índice de\nRezago Social')
+
+sns.boxenplot(x='region_indigena', y='porcentaje_de_casas_sin_drenaje_2020', data=comunidad_vul, ax = ax[0,1])
+ax[0, 1].set(xlabel='', ylabel='Porcentaje de\ncasas sin drenaje', 
+             title='Distribución de Viviendas\nSin Acceso al Drenaje')
+
+sns.boxenplot(x='region_indigena', y='porcentaje_de_casas_con_piso_de_tierra_2020', data=comunidad_vul, ax=ax[1,0])
+ax[1, 0].set(xlabel='', ylabel='Porcentaje de casas con\npiso de tierra', 
+             title='Distribución de Viviendas\nSin Piso de Tierra')
+
+sns.boxenplot(x='region_indigena', y='porcentaje_de_casas_sin_agua_2020', data=comunidad_vul, ax=ax[1,1])
+ax[1, 1].set(xlabel='', ylabel='Porcentaje de\ncasas sin agua', 
+             title='Distribución de Viviendas\nSin Acceso al Agua Potable')
+
+sns.boxenplot(x='region_indigena', y='porcentaje_de_casas_sin_luz_2020', data=comunidad_vul, ax=ax[2,0])
+ax[2, 0].set(xlabel='', ylabel='Porcentaje de\ncasas sin luz', 
+             title='Distribución de Viviendas\nSin Acceso a la Luz')
+
+sns.boxenplot(x='region_indigena', y='promedio_de_ocupantes_por_cuarto_2020', data=comunidad_vul, ax=ax[2,1])
+ax[2, 1].set(xlabel='', ylabel='Promedio de ocupantes\n por cuarto', 
+             title='Distribución de Ocupantes\npor Cuarto por Vivienda')
+
+fig.show()
+
+````
