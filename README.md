@@ -518,3 +518,64 @@ plt.legend(title='Porcentaje de personas\n que no hablan español',
 ````
 *Esta gráfica indica que al incrementar el número de hablantes de alguna lengua indígena, aumenta el porcentaje de gente que no habla españo, al igual que incrementa el número de personas que no habla español al incrementar el nivel de rezago social. Similarmente, ay más localidades con 80% o más de personas que habla lengua indígena en niveles muy altos de rezago social*
 
+
+
+### Ahora veamos que tan bien se correlacionan las vrriables del 2020 entre ellas para usarlas en la clasificación:
+
+````Python
+
+correlacion_2020 = df_2010_2020_reg[['altitud_2020','longitud_decimal','latitud_decimal',
+                                     'promedio_de_ocupantes_por_cuarto_2020', 
+                                     'porcentaje_de_casas_sin_drenaje_2020', 
+                                     'porcentaje_de_casas_sin_luz_2020', 
+                                     'porcentaje_de_casas_con_piso_de_tierra_2020', 
+                                     'porcentaje_de_casas_sin_agua_2020', 
+                                     'porcentaje_de_hablantes_indigena_2020', 
+                                     'porcentaje_de_hablantes_indigena_y_no_esp_2020',
+                                     'porcentaje_de_hablantes_bilingues_2020', 
+                                     'region_indigena', 'diferencia_rezago']]
+
+
+plt.figure(figsize=(12, 12))
+corr_matriz_todos = sns.heatmap(correlacion_2020.corr(), annot=True, cmap="coolwarm",  vmin= -1, vmax=1);
+plt.xlabel('Región Indígena', size=16, family='monospace')
+plt.ylabel('Índice de Rezago', size=16, family='monospace')
+plt.title('Correlación entre variables numéricas del 2020', 
+          size=26, family='monospace', weight=900, y=1.1);
+          
+`````
+*podemos ver que todas las variables excepto las geográficas (altitud, longitud y latitud) tienen cierta correlacion linel entre ellas*
+
+## Parte 2: Seleccionar las comunidades más vulnerables
+
+- Ahora que ya tenemos un entendimiento de los grupos más vulnerables, podemos hacer las preparaciones para seleccionar las comunidades más vulnerables
+
+### Seleccionamos a los grupos vulnerables basado en las dos comunidades con mayor falta de servicios, Los Tarahumara y la región del Gran Nayar:
+
+````Python 
+
+df_tarahumara = df_2010_2020_reg[df_2010_2020_reg.region_indigena == 'Tarahumara']
+df_gran_nayar = df_2010_2020_reg[df_2010_2020_reg.region_indigena == 'Huicot o Gran Nayar']
+df_no_indigena = df_2010_2020_reg[df_2010_2020_reg.region_indigena == 'Localidades no indigenas']
+
+# Le asignamos un 1 a las co,unidades vulnerables y un 0 al resto:
+
+df_tarahumara['comunidad_vulnerable'] = 1
+df_gran_nayar['comunidad_vulnerable'] = 1
+df_no_indigena['comunidad_vulnerable'] = 0
+
+# las juntamos en una sola DF 
+
+comunidad_vul = pd.concat([df_tarahumara, df_no_indigena, df_gran_nayar])
+
+# checamos la cantidad de localidades dentro de cada grupo: 
+
+comunidad_vul.groupby('comunidad_vulnerable')['comunidad_vulnerable'].value_counts()
+
+`````
+
+>comunidad_vulnerable  comunidad_vulnerable
+0                     0                       64894
+1                     1                        2741
+
+### Hagamos una matríz de correlaciones entre las variables que selecc
