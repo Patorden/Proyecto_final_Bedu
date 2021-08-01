@@ -363,7 +363,7 @@ Hist_sin_Rezago <- ggplot(Data.reg, aes(x = reorder(region_indigena, indice_de_r
                      y = indice_de_rezago_social_2010)) + 
   coord_flip() +
   geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
-  ggtitle("Rezago social por región indígena") +
+  ggtitle("Rezago social por región indígena en 2010") +
   xlab("Región Indígena") +
   ylab("Dispersión de rezago social") +
   theme_linedraw() + 
@@ -375,7 +375,7 @@ Hist_sin_Agua <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje_de
                      y = porcentaje_de_casas_sin_agua_2010)) + 
   coord_flip() +
   geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
-  ggtitle("Acceso al agua por región indígena") +
+  ggtitle("Acceso al agua por región indígena en 2010") +
   xlab("Región Indígena") +
   ylab("Porcentaje de viviendas por localidad \nsin acceso al agua entubada") +
   theme_linedraw() + 
@@ -387,7 +387,7 @@ Hist_sin_Luz <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje_de_
                      y = porcentaje_de_casas_sin_luz_2010)) + 
   coord_flip() +
   geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
-  ggtitle("Acceso a luz eléctrica por región indígena") +
+  ggtitle("Acceso a luz eléctrica por\nregión indígena en 2010") +
   xlab("Región Indígena") +
   ylab("Porcentaje de viviendas por localidad \nsin acceso a luz eléctrica") +
   theme_linedraw() + 
@@ -399,7 +399,7 @@ Hist_piso_tierra <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje
                                      y = porcentaje_de_casas_con_piso_de_tierra_2010)) + 
   coord_flip() +
   geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
-  ggtitle("Viviendas con piso de tierra por región indígena") +
+  ggtitle("Viviendas con piso de tierra por\nregión indígena en 2010") +
   xlab("Región Indígena") +
   ylab("Porcentaje de viviendas por \n localidad con piso de tierra") +
   theme_linedraw() + 
