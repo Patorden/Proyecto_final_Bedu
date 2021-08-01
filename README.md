@@ -465,6 +465,14 @@ plt.title('Cambio en el Índice de Rezago del 2010 al 2020\n por Región Indíge
 
 *aguí podemos ver que hubo más diferencia positiva (refiriendise a que aumentó) que negativo (decreció el rezago). Las mas afectadas son Tarahumara y Gran nayar, mientras que las localidades no indígenas tuvieron un aumento muy pequeño. Ottras regiones como LoscNáhuas de Veracrúz y Valles Centrales, decreció significativamente el rezago.*
 
+### Ahora, esta métrica de la diferencia de rezago del 2010 al 2020 nos va a servir más adelante para icluir la diferncia para seleccionar las localidades más vulnerables
+
+````Python 
+
+df_2010_2020_reg['diferencia_rezago'] = (df_2010_2020_reg['indice_de_rezago_social_2010'] - df_2010_2020_reg['indice_de_rezago_social_2020']) * -1
+
+````
+
 ### Ahora vemos el número de personas nuevas en rezago muy alto y alto: 
 
 ````Python 
@@ -494,3 +502,19 @@ aumentó en un 158.4% en 2020, con 362962 en esta categoría
 
 > Similarmente, la población en grado de rezago social alto en 2010 era 1721015 y 
 aumentó en un 115.3% en 2020, con 3705725 en esta categoría
+
+### Ahora veamos la distribución de hablan tes de lenguas indígenas por nivel de rezago social: 
+
+````Python
+
+ax = sns.set_style('darkgrid')
+ax = sns.scatterplot(df_2010_2020_reg['porcentaje_de_hablantes_indigena_2020'], 
+                     df_2010_2020_reg['indice_de_rezago_social_2020'], 
+                     hue=df_2010_2020_reg['porcentaje_de_hablantes_indigena_y_no_esp_2020']);
+ax.set(xlabel='porcentaje de hablantes indígenas por localidad')
+ax.set(ylabel='índice de rezago social')
+plt.legend(title='Porcentaje de personas\n que no hablan español',
+           bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+````
+*Esta gráfica indica que al incrementar el número de hablantes de alguna lengua indígena, aumenta el porcentaje de gente que no habla españo, al igual que incrementa el número de personas que no habla español al incrementar el nivel de rezago social. Similarmente, ay más localidades con 80% o más de personas que habla lengua indígena en niveles muy altos de rezago social*
+
