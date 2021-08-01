@@ -464,3 +464,32 @@ plt.title('Cambio en el Índice de Rezago del 2010 al 2020\n por Región Indíge
 ````
 
 *aguí podemos ver que hubo más diferencia positiva (refiriendise a que aumentó) que negativo (decreció el rezago). Las mas afectadas son Tarahumara y Gran nayar, mientras que las localidades no indígenas tuvieron un aumento muy pequeño. Ottras regiones como LoscNáhuas de Veracrúz y Valles Centrales, decreció significativamente el rezago.*
+
+### Ahora vemos el número de personas nuevas en rezago muy alto y alto: 
+
+````Python 
+rezago_muy_alto_2010 = df_2010_2020_reg[df_2010_2020_reg['grado_de_rezago_social_2010'] == 'Muy alto']
+rezago_muy_alto_2020 = df_2010_2020_reg[df_2010_2020_reg['grado_de_rezago_social_2020'] == 'Muy alto']
+
+pob_rezago_muy_alto_2010 = rezago_muy_alto_2010['poblacion_total_2010'].sum()
+pob_rezago_muy_alto_2020 = rezago_muy_alto_2020['poblacion_total_2020'].sum()
+
+rezago_alto_2010 = df_2010_2020_reg[df_2010_2020_reg['grado_de_rezago_social_2010'] == 'Alto']
+rezago_alto_2020 = df_2010_2020_reg[df_2010_2020_reg['grado_de_rezago_social_2020'] == 'Alto']
+
+pob_rezago_alto_2010 = rezago_alto_2010['poblacion_total_2010'].sum()
+pob_rezago_alto_2020 = rezago_alto_2020['poblacion_total_2020'].sum()
+
+porcentaje_de_cambio_muy_alto = round(((pob_rezago_muy_alto_2020/pob_rezago_muy_alto_2010)*100)-100,1)
+porcentaje_de_cambio_alto = round(((pob_rezago_alto_2020/pob_rezago_alto_2010)*100)-100,1)
+
+print(f'''La población en grado de rezago social muy alto en 2010 era {pob_rezago_muy_alto_2010} y 
+aumentó en un {porcentaje_de_cambio_muy_alto}% en 2020, con {pob_rezago_muy_alto_2020} en esta categoría con \n''')
+
+print(f'''Similarmente, la población en grado de rezago social alto en 2010 era {pob_rezago_alto_2010} y 
+aumentó en un {porcentaje_de_cambio_alto}% en 2020, con {pob_rezago_alto_2020} en esta categoría''')
+````
+- [x] La población en grado de rezago social muy alto en 2010 era 140476 y 
+aumentó en un 158.4% en 2020, con 362962 en esta categoría
+- [x] Similarmente, la población en grado de rezago social alto en 2010 era 1721015 y 
+aumentó en un 115.3% en 2020, con 3705725 en esta categoría
