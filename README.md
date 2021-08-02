@@ -573,6 +573,8 @@ comunidad_vul = pd.concat([df_tarahumara, df_no_indigena, df_gran_nayar])
 comunidad_vul.groupby('comunidad_vulnerable')['comunidad_vulnerable'].value_counts()
 
 `````
+output: 
+
 comunidad_vulnerable | comunidad_vulnerable
 ------------ | -------------
 0 | 64894
@@ -638,7 +640,7 @@ comunidad_vul_train = comunidad_vul[['promedio_de_ocupantes_por_cuarto_2020',
 comunidad_vul_train.dtypes
 
 `````
-
+output:
 `````
 promedio_de_ocupantes_por_cuarto_2020          float64
 porcentaje_de_casas_sin_drenaje_2020           float64
