@@ -620,3 +620,33 @@ ax[2, 1].set(xlabel='', ylabel='Promedio de ocupantes\n por cuarto',
 fig.show()
 
 ````
+*Se puede apreciar que en todas las variables que vamos a usar tienen una distribución distinta, menos marcada en el promedio de ocupantes por cuarto y la diferencia de rezago.*
+
+### ahora seleccionemos nuestras variables para la predicción y hagamos una matríz de correlación con estos valores:
+
+````Python
+comunidad_vul_train = comunidad_vul[['promedio_de_ocupantes_por_cuarto_2020', 
+                               'porcentaje_de_casas_sin_drenaje_2020', 
+                               'porcentaje_de_casas_sin_luz_2020', 
+                               'porcentaje_de_casas_con_piso_de_tierra_2020', 
+                               'porcentaje_de_casas_sin_agua_2020', 
+                               'porcentaje_de_hablantes_indigena_2020', 
+                               'diferencia_rezago','comunidad_vulnerable']]
+                               
+# ahora checamos que todos sena valores numéricos
+
+comunidad_vul_train.dtypes
+
+`````
+
+`````
+promedio_de_ocupantes_por_cuarto_2020          float64
+porcentaje_de_casas_sin_drenaje_2020           float64
+porcentaje_de_casas_sin_luz_2020               float64
+porcentaje_de_casas_con_piso_de_tierra_2020    float64
+porcentaje_de_casas_sin_agua_2020              float64
+porcentaje_de_hablantes_indigena_2020          float64
+diferencia_rezago                              float64
+comunidad_vulnerable                             int64
+dtype: object
+`````
