@@ -709,4 +709,102 @@ def evaluar(y_test, y_pred):
     print("Sensibilidad:"+str(sen)+"%")
     print("Especificidad:"+str(spec)+"%")
 ````
+### Bien, ahora podemos provar varios métodos para clasificar nuestra df y elegir el mejor:
 
+#### Árobles de Desición:
+
+````Python
+from sklearn.ensemble import RandomForestClassifier
+bosque = RandomForestClassifier(n_estimators = 800)
+bosque.fit(x_train, y_train)
+y_pred_rf = bosque.predict(x_test)
+
+evaluar(y_test, y_pred_rf)
+````
+output:
+`````
+[[19389    72]
+ [  235   595]]
+True positives: 595
+True negatives: 19389
+False positives: 72
+False negative: 235
+Precision: 98.48701394707014%
+Sensibilidad: 71.6867469879518%
+Especificidad: 99.63002928934792%
+`````
+#### Redes Neuronales Artificiales:
+
+````Python
+
+from sklearn.neural_network import MLPClassifier
+NeuralNetwork = MLPClassifier(hidden_layer_sizes=(7,10),
+                            max_iter=20000,
+                            activation ='logistic',
+                            tol= 1e-8)
+NeuralNetwork.fit(x_train, y_train)
+y_pred_nn = NeuralNetwork.predict(x_test)
+
+evaluar(y_test, y_pred_nn)
+````
+
+output:
+`````
+[[19386    75]
+ [  245   585]]
+True positives: 585
+True negatives: 19386
+False positives: 75
+False negative: 245
+Precision: 98.42294613375388%
+Sensibilidad: 70.48192771084338%
+Especificidad: 99.61461384307076%
+`````
+#### Support Vector Machine:
+
+````Python
+
+from sklearn.svm import SVC #Support Vector Classifier
+from sklearn.pipeline import make_pipeline
+
+SupportVectorMachine = SVC()
+SupportVectorMachine.fit(x_train, y_train) 
+y_pred_svm = SupportVectorMachine.predict(x_test)
+
+evaluar(y_test, y_pred_svm)
+````
+output:
+`````
+[[19405    56]
+ [  255   575]]
+True positives: 575
+True negatives: 19405
+False positives: 56
+False negative: 255
+Precision: 98.46730077374205%
+Sensibilidad: 69.27710843373494%
+Especificidad: 99.71224500282617%
+`````
+#### Naïve Bayes:
+
+````Python
+
+from sklearn.naive_bayes import GaussianNB
+NaiveBayes = GaussianNB()
+NaiveBayes.fit(x_train, y_train) 
+y_pred_nb = NaiveBayes.predict(x_test)
+
+evaluar(y_test, y_pred_nb)
+````
+output:
+`````
+[[18351  1110]
+ [  161   669]]
+True positives: 669
+True negatives: 18351
+False positives: 1110
+False negative: 161
+Precision: 93.7361391750037%
+Sensibilidad: 80.60240963855422%
+Especificidad: 94.2962848774472%
+`````
