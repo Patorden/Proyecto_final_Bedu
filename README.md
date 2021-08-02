@@ -808,3 +808,38 @@ Precision: 93.7361391750037%
 Sensibilidad: 80.60240963855422%
 Especificidad: 94.2962848774472%
 `````
+### Dados nuestros resultados, elegiremos los árboles de desición, ya que nos direon muy buenos resultados. Así que la usaremos para por fin clasificar nuestra df y seleccionar las comunidades más vulnerables:
+
+````Python
+
+Seleccionamos las columnas necesarias para la clasificación con todos los datos:
+
+prediccion_localidades_2020 = df_2010_2020_reg[['promedio_de_ocupantes_por_cuarto_2020', 
+                                                'porcentaje_de_casas_sin_drenaje_2020', 
+                                                'porcentaje_de_casas_sin_luz_2020', 
+                                                'porcentaje_de_casas_con_piso_de_tierra_2020', 
+                                                'porcentaje_de_casas_sin_agua_2020', 
+                                                'porcentaje_de_hablantes_indigena_2020', 
+                                                'diferencia_rezago']]
+
+# Ahora hacemos las predicciones usando el modelo entrenado: 
+
+prediccion_localidades_2020_resultado = bosque.predict(prediccion_localidades_2020)
+
+# anexamos el resultado como una columna nueva:
+
+prediccion_localidades_2020['comunidad_vulnerable'] = prediccion_localidades_2020_resultado
+
+# vemos cuántas localidades fueron seleccionadas como vulnerables:
+
+prediccion_localidades_2020.groupby('comunidad_vulnerable')['comunidad_vulnerable'].value_counts()
+````` 
+output:
+`````
+comunidad_vulnerable  comunidad_vulnerable
+0                     0                       84617
+1                     1                        8031
+Name: comunidad_vulnerable, dtype: int64
+`````
+*Podemos ver que menos del 10% delas localidades fueron seleccionadas, y es lo que queríamos, que nos diera los casos más extremos.
+
