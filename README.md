@@ -622,7 +622,7 @@ ax[2, 1].set(xlabel='', ylabel='Promedio de ocupantes\n por cuarto',
 fig.show()
 
 ````
-*Se puede apreciar que en todas las variables que vamos a usar tienen una distribución distinta, menos marcada en el promedio de ocupantes por cuarto y la diferencia de rezago.*
+*Se puede apreciar que en todas las variables que vamos a usar tienen una distribución distinta, aunque menos marcada en el promedio de ocupantes por cuarto y la diferencia de rezago.*
 
 ### ahora seleccionemos nuestras variables para la predicción y hagamos una matríz de correlación con estos valores:
 
@@ -652,3 +652,61 @@ diferencia_rezago                              float64
 comunidad_vulnerable                             int64
 dtype: object
 `````
+````Python
+# hagamos la matríz de correlación una vez más
+
+plt.figure(figsize=(12, 12))
+sns.heatmap(comunidad_vul_train.corr(), annot=True, cmap= "vlag",  vmin= -0.7, vmax=0.7);
+
+plt.title('Correlación entre variables numéricas del 2020\npara la predicción de localidades vulnerables', 
+          size=26, family='monospace', weight=900, y=1.1);
+````
+
+### Bien, ahora separamos nuestra df en x y x, y la dividimos en entrenamiento (70%) y prueba (30%):
+
+````Python
+from sklearn.model_selection import train_test_split
+
+x = comunidad_vul_train.drop(columns=['comunidad_vulnerable'])
+y = comunidad_vul_train['comunidad_vulnerable']
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.30) 
+
+`````
+
+### Importamos la función de matríz de confusión de sklearn para evaluar nuestro modelo y creamos unas funciones para que nos de las métricas de precisión, sensibilidad y especificidad. 
+
+````Python
+
+from sklearn.metrics import confusion_matrix
+
+def calcularAccuracy(TP, TN, FP, FN):
+    accuracy = (TP + TN) / (TP + TN + FP + FN)
+    accuracy = accuracy * 100
+    return accuracy
+def calcularSensibilidad(TP, TN, FP, FN):
+    sensibilidad = TP / (TP + FN)
+    sensibilidad = sensibilidad * 100
+    return sensibilidad
+def calcularEspecificidad(TP, TN, FP, FN):
+    especificidad = TN / (TN + FP) 
+    especificidad = especificidad * 100
+    return especificidad
+
+def evaluar(y_test, y_pred):
+    resultado = confusion_matrix(y_test, y_pred)
+    print(resultado)
+    (TN, FP, FN, TP) = resultado.ravel()
+    print("True positives: "+str(TP))
+    print("True negatives: "+str(TN))
+    print("False positives: "+str(FP))
+    print("False negative: "+str(FN))
+
+    acc = calcularAccuracy(TP, TN, FP, FN)
+    sen = calcularSensibilidad(TP, TN, FP, FN)
+    spec = calcularEspecificidad(TP, TN, FP, FN)
+    print("Precision:"+str(acc)+"%")
+    print("Sensibilidad:"+str(sen)+"%")
+    print("Especificidad:"+str(spec)+"%")
+````
+
