@@ -888,3 +888,42 @@ comunidad_vulnerable  comunidad_vulnerable
 Name: comunidad_vulnerable, dtype: int64
 `````
 *Podemos ver que menos del 10% delas localidades fueron seleccionadas, y es lo que queríamos, que nos diera los casos más extremos.*
+
+### veamos cuantas localidades por región quedaron en nuestra categoría de comunidades vulnerables:
+
+````Python
+df_2010_2020_reg[df_2010_2020_reg['comunidad_vulnerable']==0].groupby('comunidad_vulnerable')['region_indigena'].value_counts()
+``````
+output:
+
+`````
+comunidad_vulnerable  region_indigena                      
+0                     Localidades no indigenas                 64823
+                      Huasteca                                  2929
+                      Sierra Norte de Puebla y Totonacapan      2067
+                      Selva Lacandona                           1705
+                      Cuic_Zong_Maza_Tehu                       1306
+                      Maya                                      1295
+                      Mazahua-Otomi                             1237
+                      Mixteca                                   1154
+                      Costa y Sierra Sur de Oaxaca               874
+                      Montania de Guerrero                       798
+                      Altos de Chiapas                           777
+                      Otomi de Hidalgo y Queretaro               731
+                      Norte de Chiapas                           721
+                      Tuxtlas, Popoluca-Nahuatl de Veracruz      597
+                      Frontera Sur                               590
+                      Mayo-Yaqui                                 494
+                      Chinanteca                                 491
+                      Valles Centrales                           425
+                      Chontal de Tabasco                         414
+                      Istmo                                      396
+                      Mixe                                       213
+                      Tarahumara                                 187
+                      Sierra de Juarez                           161
+                      Purepecha                                  149
+                      Huicot o Gran Nayar                         47
+                      Chimalapa                                   36
+Name: region_indigena, dtype: int64
+`````
+### veamos cuantas localidades por región quedaron en nuestra categoría de comunidades vulnerables
