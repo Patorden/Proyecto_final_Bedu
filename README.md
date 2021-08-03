@@ -898,32 +898,32 @@ output:
 
 `````
 comunidad_vulnerable  region_indigena                      
-0                     Localidades no indigenas                 64823
-                      Huasteca                                  2929
-                      Sierra Norte de Puebla y Totonacapan      2067
-                      Selva Lacandona                           1705
-                      Cuic_Zong_Maza_Tehu                       1306
-                      Maya                                      1295
-                      Mazahua-Otomi                             1237
-                      Mixteca                                   1154
-                      Costa y Sierra Sur de Oaxaca               874
-                      Montania de Guerrero                       798
-                      Altos de Chiapas                           777
-                      Otomi de Hidalgo y Queretaro               731
-                      Norte de Chiapas                           721
-                      Tuxtlas, Popoluca-Nahuatl de Veracruz      597
-                      Frontera Sur                               590
-                      Mayo-Yaqui                                 494
-                      Chinanteca                                 491
-                      Valles Centrales                           425
-                      Chontal de Tabasco                         414
-                      Istmo                                      396
-                      Mixe                                       213
-                      Tarahumara                                 187
-                      Sierra de Juarez                           161
-                      Purepecha                                  149
-                      Huicot o Gran Nayar                         47
-                      Chimalapa                                   36
+1                     Tarahumara                               1627
+                      Huasteca                                  915
+                      Huicot o Gran Nayar                       880
+                      Selva Lacandona                           840
+                      Cuic_Zong_Maza_Tehu                       811
+                      Montania de Guerrero                      758
+                      Mixteca                                   617
+                      Altos de Chiapas                          340
+                      Costa y Sierra Sur de Oaxaca              260
+                      Sierra Norte de Puebla y Totonacapan      160
+                      Maya                                      156
+                      Chinanteca                                140
+                      Mixe                                      124
+                      Localidades no indigenas                   71
+                      Norte de Chiapas                           69
+                      Valles Centrales                           64
+                      Mayo-Yaqui                                 52
+                      Istmo                                      45
+                      Otomi de Hidalgo y Queretaro               31
+                      Purepecha                                  18
+                      Tuxtlas, Popoluca-Nahuatl de Veracruz      18
+                      Sierra de Juarez                           15
+                      Frontera Sur                               14
+                      Mazahua-Otomi                               4
+                      Chimalapa                                   1
+                      Chontal de Tabasco                          1
 Name: region_indigena, dtype: int64
 `````
-### veamos cuantas localidades por región quedaron en nuestra categoría de comunidades vulnerables
+*Podemos ver que siguen habiendo muchas comunidades indíghenas en la predicción, principalmente por la variable de las lenguas indígenas*
