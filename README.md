@@ -362,7 +362,7 @@ df_2010_2020_reg <- na.omit(read.csv("/Users/vottov/Desktop/Data Analysis & pyth
 
 attach(df_2010_2020_reg)
 
-Hist_sin_Rezago <- ggplot(Data.reg, aes(x = reorder(region_indigena, indice_de_rezago_social_2010, fun = mean), 
+boxplot_sin_rezago <- ggplot(Data.reg, aes(x = reorder(region_indigena, indice_de_rezago_social_2010, fun = mean), 
                      y = indice_de_rezago_social_2010)) + 
   coord_flip() +
   geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
@@ -374,7 +374,7 @@ Hist_sin_Rezago <- ggplot(Data.reg, aes(x = reorder(region_indigena, indice_de_r
 
 # Acceso al agua por región indígena 
 
-Hist_sin_Agua <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje_de_casas_sin_agua_2010, fun = mean), 
+boxplot_sin_agua <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje_de_casas_sin_agua_2010, fun = mean), 
                      y = porcentaje_de_casas_sin_agua_2010)) + 
   coord_flip() +
   geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
@@ -386,7 +386,7 @@ Hist_sin_Agua <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje_de
 
 # Acceso a luz eléctrica por región indígena 
 
-Hist_sin_Luz <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje_de_casas_sin_luz_2010, fun = mean), 
+boxplot_sin_Luz <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje_de_casas_sin_luz_2010, fun = mean), 
                      y = porcentaje_de_casas_sin_luz_2010)) + 
   coord_flip() +
   geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
@@ -398,7 +398,7 @@ Hist_sin_Luz <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje_de_
 
 # viviendas con piso de tierra por región indígena: 
 
-Hist_piso_tierra <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje_de_casas_con_piso_de_tierra_2010, fun = mean), 
+boxplot_piso_tierra <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje_de_casas_con_piso_de_tierra_2010, fun = mean), 
                                      y = porcentaje_de_casas_con_piso_de_tierra_2010)) + 
   coord_flip() +
   geom_boxplot(col="black", fill = "light blue", outlier.colour = "dark red" ) +
@@ -410,25 +410,25 @@ Hist_piso_tierra <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje
 `````
 
 `````R
-Hist_sin_Agua
+boxplot_sin_agua
 `````
 
 ![](images/Acceso_agua_region_ind(r).png)
 
 `````R
-Hist_sin_Luz
+boxplot_sin_Luz
 `````
 
 ![](images/Acceso_agua_region_ind(r).png)
 
 `````R
-Hist_sin_Rezago
+boxplot_sin_rezago
 `````
 
 ![](images/rezago_social_por_region(r).png)
 
 `````R
-Hist_piso_tierra
+boxplot_piso_tierra
 `````
 
 ![](images/viviendas_con_piso_de_tierra_por_region(r).png)
