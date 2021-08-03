@@ -407,13 +407,32 @@ Hist_piso_tierra <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje
   ylab("Porcentaje de viviendas por \n localidad con piso de tierra") +
   theme_linedraw() + 
   theme(text=element_text(size=10, family="Courier", face = "bold"))
+`````
 
+`````R
 Hist_sin_Agua
+`````
 
+![](Acceso_agua_region_ind(r).png)
+
+`````R
 Hist_sin_Luz
+`````
+
+![](Acceso_agua_region_ind(r).png)
+
+`````R
 Hist_sin_Rezago
+`````
+
+![](rezago_social_por_region(r).png)
+
+`````R
 Hist_piso_tierra
 `````
+
+![](viviendas_con_piso_de_tierra_por_region(r).png)
+
 
 *Podemos ver que las tegiones tarahuamras y garn nayar tienen desproporcionadamente menos acceso a agua y al drenaje, al igual que mayor rezago social y casas con piso de tierra*
 
