@@ -406,6 +406,7 @@ Hist_piso_tierra <- ggplot(Data.reg, aes(x = reorder(region_indigena, porcentaje
   theme(text=element_text(size=10, family="Courier", face = "bold"))
 
 Hist_sin_Agua
+
 Hist_sin_Luz
 Hist_sin_Rezago
 Hist_piso_tierra
@@ -843,3 +844,4 @@ Name: comunidad_vulnerable, dtype: int64
 `````
 *Podemos ver que menos del 10% delas localidades fueron seleccionadas, y es lo que queríamos, que nos diera los casos más extremos.
 
+![](images/Acceso al agua por region ind 2010 (r).png)
