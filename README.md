@@ -842,6 +842,4 @@ comunidad_vulnerable  comunidad_vulnerable
 1                     1                        8031
 Name: comunidad_vulnerable, dtype: int64
 `````
-*Podemos ver que menos del 10% delas localidades fueron seleccionadas, y es lo que queríamos, que nos diera los casos más extremos.
-
-![](images/Acceso%20al%20agua%20por%20region%20ind%202010%20(r).png)
+*Podemos ver que menos del 10% delas localidades fueron seleccionadas, y es lo que queríamos, que nos diera los casos más extremos.*
