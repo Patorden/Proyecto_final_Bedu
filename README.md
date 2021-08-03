@@ -454,13 +454,15 @@ plt.xlabel('Índice de Rezago Social', size=16, family='monospace')
 plt.ylabel('Densidad', size=16, family='monospace')
 
 ````
+![](images/dist_indice_2010_2020.png)
+
 *Podemos ver que aumentó la cantidad de viviendas en un grado de rezago medio, al igual que aumntó la cola superior (mas localidades con menos srevicios, y decreció la cola inferior, o se redujeron el número de localidades con muy poco rezago. Esto indica que ¨empeoró¨ el rezago social en méxico*
 
 ### Veamos la diferencia del rezago social del 2010 al 2020 por región indígena:
 
 ````Python
 
-# Primero aggarramos el promedio del índice de rezago social de ambos años y lo agrupamos por región indígena:
+# Primero agarramos el promedio del índice de rezago social de ambos años y lo agrupamos por región indígena:
 
 rez_ind= df_2010_2020_reg.groupby('region_indigena')[['indice_de_rezago_social_2010', 'indice_de_rezago_social_2020']].mean()
 
@@ -485,6 +487,7 @@ plt.ylabel('Índice de Rezago', size=16, family='monospace')
 plt.title('Cambio en el Índice de Rezago del 2010 al 2020\n por Región Indígena', 
           size=26, family='monospace', weight=900, y=1.1)
 ````
+![](images/cambio_indice_2010_2020_(py).png)
 
 *aguí podemos ver que hubo más diferencia positiva (refiriendise a que aumentó) que negativo (decreció el rezago). Las mas afectadas son Tarahumara y Gran nayar, mientras que las localidades no indígenas tuvieron un aumento muy pequeño. Ottras regiones como LoscNáhuas de Veracrúz y Valles Centrales, decreció significativamente el rezago.*
 
@@ -520,25 +523,37 @@ aumentó en un {porcentaje_de_cambio_muy_alto}% en 2020, con {pob_rezago_muy_alt
 print(f'''Similarmente, la población en grado de rezago social alto en 2010 era {pob_rezago_alto_2010} y 
 aumentó en un {porcentaje_de_cambio_alto}% en 2020, con {pob_rezago_alto_2020} en esta categoría''')
 ````
+output:
+
+````
 > La población en grado de rezago social muy alto en 2010 era 140476 y 
 aumentó en un 158.4% en 2020, con 362962 en esta categoría
 
 > Similarmente, la población en grado de rezago social alto en 2010 era 1721015 y 
 aumentó en un 115.3% en 2020, con 3705725 en esta categoría
+````
 
-### Ahora veamos la distribución de hablan tes de lenguas indígenas por nivel de rezago social: 
+### Ahora veamos la distribución de hablantes de lenguas indígenas por nivel de rezago social: 
 
 ````Python
 
 ax = sns.set_style('darkgrid')
 ax = sns.scatterplot(df_2010_2020_reg['porcentaje_de_hablantes_indigena_2020'], 
-                     df_2010_2020_reg['indice_de_rezago_social_2020'], 
+                     df_2010_2020_reg['indice_de_rezago_social_2020'],
                      hue=df_2010_2020_reg['porcentaje_de_hablantes_indigena_y_no_esp_2020']);
-ax.set(xlabel='porcentaje de hablantes indígenas por localidad')
-ax.set(ylabel='índice de rezago social')
+
 plt.legend(title='Porcentaje de personas\n que no hablan español',
            bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+
+plt.xlabel('porcentaje de hablantes indígenas por localidad', size=16, family='monospace')
+
+plt.ylabel('índice de rezago social', size=16, family='monospace')
+plt.title('Porcentaje de personas\n que no hablan español en 2020', 
+          size=26, family='monospace', weight=900, y=1.1);
 ````
+
+![](images/Porcentaje_ no_español_2020.png)
+
 *Esta gráfica indica que al incrementar el número de hablantes de alguna lengua indígena, aumenta el porcentaje de gente que no habla españo, al igual que incrementa el número de personas que no habla español al incrementar el nivel de rezago social. Similarmente, ay más localidades con 80% o más de personas que habla lengua indígena en niveles muy altos de rezago social*
 
 
@@ -567,6 +582,9 @@ plt.title('Correlación entre variables numéricas del 2020',
           size=26, family='monospace', weight=900, y=1.1);
           
 `````
+
+![](images/corr_variables_numericas_2020.png)
+
 *podemos ver que todas las variables excepto las geográficas (altitud, longitud y latitud) tienen cierta correlacion linel entre ellas*
 
 ## Parte 2: Seleccionar las comunidades más vulnerables
@@ -605,7 +623,7 @@ comunidad_vulnerable | comunidad_vulnerable
 
 *aquí podemos ver que las comunidades no vulnerables estan sobre representadas, casí 30 registros más que las vulnerables. En general esto haría que nuestro algoritmo hsesge los resultados, para nuestro caso, que sólo queremos encontrar las comunidades más vulnerables, nos conviene, así sólo selecciona lo más extremo.*
 
-### AHora, hagamos una serie de boxplots con varias variables comparando los dos grupos seleccionados, previendo lo que 'vería' el algoritmo para tomar una decisión de si es vulnerable o no. Igual no ayudará a ver si las variables tienen una diferencia estadística suficiente
+### Ahora, hagamos una serie de boxplots con varias variables comparando los dos grupos seleccionados, previendo lo que 'vería' el algoritmo para tomar una decisión de si es vulnerable o no. Igual no ayudará a ver si las variables tienen una diferencia estadística suficiente
 
 ````Python
 
@@ -645,6 +663,9 @@ ax[2, 1].set(xlabel='', ylabel='Promedio de ocupantes\n por cuarto',
 fig.show()
 
 ````
+
+![](images/dist_6_variables_vulnerable.png)
+
 *Se puede apreciar que en todas las variables que vamos a usar tienen una distribución distinta, aunque menos marcada en el promedio de ocupantes por cuarto y la diferencia de rezago.*
 
 ### ahora seleccionemos nuestras variables para la predicción y hagamos una matríz de correlación con estos valores:
@@ -675,6 +696,8 @@ diferencia_rezago                              float64
 comunidad_vulnerable                             int64
 dtype: object
 `````
+
+
 ````Python
 # hagamos la matríz de correlación una vez más
 
@@ -684,7 +707,7 @@ sns.heatmap(comunidad_vul_train.corr(), annot=True, cmap= "vlag",  vmin= -0.7, v
 plt.title('Correlación entre variables numéricas del 2020\npara la predicción de localidades vulnerables', 
           size=26, family='monospace', weight=900, y=1.1);
 ````
-
+![](images/corr_para_prediccion_2020.png)
 ### Bien, ahora separamos nuestra df en x y x, y la dividimos en entrenamiento (70%) y prueba (30%):
 
 ````Python
