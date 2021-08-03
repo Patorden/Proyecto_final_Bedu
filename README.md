@@ -1,5 +1,5 @@
 # Proyecto Final Bedu:
-**¿Dónde Empezar con un Proyecto Social? Predicción de las Comunidades Más Vulnerables en México Usando un Modelo de Machine Learning.**
+# __¿Dónde Empezar con un Proyecto Social? Predicción de las Comunidades Más Vulnerables en México Usando un Modelo de Machine Learning.__
 
 ## Este proyecto se enfoca en analizar la distribución de la carencia en recursos básicos y servicios dentro de México a nivel localidad, enfocandose principalmente en la división entre diferentes grupos indígenas. 
 
