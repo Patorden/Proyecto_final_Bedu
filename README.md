@@ -964,7 +964,7 @@ En las comunidades seleccionadas como vulnerables hay un total de
 total de 460770 viviendas totales que representa el 1.1 del total nacional
 `````
 
-### Finalmente podemos usar estos datos para generar una estrategia de dónde llevar a cabo el proyecto, focalizar recursos y cuantificar el número de personas, localidades, distancias, estados. Igualmente, se necesitaría un filtro más dependiendo del tipo de proyecto, por ejemplo para la instalación de sistemas de captación de agua de lluvia, se puede integrar con sistemas de información geográfica la precipitación media anual en cada localidad. Con esto se pueden seleccionar aquellas localidades que tengan una precipitación mayor a cierto límite para que el proyecto sea existoso. 
+Finalmente podemos usar estos datos para generar una estrategia de dónde llevar a cabo el proyecto, focalizar recursos y cuantificar el número de personas, localidades, distancias, estados. Igualmente, se necesitaría un filtro más dependiendo del tipo de proyecto, por ejemplo para la instalación de sistemas de captación de agua de lluvia, se puede integrar con sistemas de información geográfica la precipitación media anual en cada localidad. Con esto se pueden seleccionar aquellas localidades que tengan una precipitación mayor a cierto límite para que el proyecto sea existoso. 
 
 *Link al drive donde se encuentran los datos del proyecto:*
 
