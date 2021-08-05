@@ -590,7 +590,7 @@ plt.title('Correlación entre variables numéricas del 2020',
 
 ## Parte 2: Seleccionar las comunidades más vulnerables
 
-## Ahora que ya tenemos un entendimiento de los grupos más vulnerables, podemos hacer las preparaciones para seleccionar las comunidades más vulnerables.
+## Ahora que ya tenemos un entendimiento de los grupos más vulnerables, podemos hacer las preparaciones para seleccionar las comunidades más vulnerables.
 
 ### Seleccionamos a los grupos vulnerables basado en las dos comunidades con mayor falta de servicios, Los Tarahumara y la región del Gran Nayar, y las comunidades no vulnerables como las localidades no indígenas:
 
