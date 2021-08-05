@@ -1,5 +1,5 @@
-# Proyecto Final Bedu:
 # __¿Dónde Empezar con un Proyecto Social? Predicción de las Comunidades Más Vulnerables en México Usando un Modelo de Machine Learning.__
+
 Este proyecto tiene como objetivo:
 
 1. Entender y estudiar el grado de rezago social y falta de servicios básicos en México a través de visualizaciones gráficas y estadística descriptiva, especialmente enfocado a los grupos más vulnerables del país.
@@ -7,7 +7,9 @@ Este proyecto tiene como objetivo:
 
 Esto enfocado a realizar una estrategia para implementar proyectos sociales de la manera más eficiente y en las localidades con mayor necesidad. 
 
+*Este Proyecto está creado en Python y en R, ya que fueron los principales softwares que nos ofrecieron en el curso*
 
+## Empezemos con el análisis estadistico: 
 
 ### Agregamos los datos del 2010 (en R):
 
@@ -27,7 +29,7 @@ rezago <- na.omit(read.csv("/Users/vottov/Desktop/Data Analysis & python /Projec
 servicios <- na.omit(read.csv("/Users/vottov/Desktop/Data Analysis & python /Projecto bueno /tablas listas /CSV finales/Servicios basicos de vivendas.csv"))
 
 ```
-### Creamos una función para sacar el porcentaje de casas sin ciertos servicios, ya que sòlo indica el número de casas sin servicio por localidad para los datos del 2010 (en R):
+### Creamos una función para sacar el porcentaje de casas sin ciertos servicios y normalizar los datos, ya que sólo indica el número de casas sin servicio por localidad en el 2010 (en R):
 
 ```R
 
@@ -57,7 +59,7 @@ attach(viviendas)
 
 viviendas <- porcentaje(viviendas,viv_ocup_habit_piso_tierra,viv_ocup_habit_piso_no_tierra,2,"casasPisoTierra_x100")
 
-# Ahora vamos a crear el porcentaje de hablantes de legua indígena por localidad a travès de una función par que nos de el porcentaje de hablantes de leguans indigenas:
+# Ahora vamos a crear el porcentaje de hablantes de legua indígena por localidad a través de una función que nos de el porcentaje:
 
 porcentaje2 <- function(DF,habl,pop_tot,round,nom_col){
   DF <- mutate(DF, col1 = round(
@@ -83,6 +85,7 @@ lenguas_ind_censo_DF <- porcentaje2(lenguas_ind_censo_DF, Hablantes_leng_indig_y
 ````
 
 ### Después limpiamos las Dataframes con las columnas necesarias y las juntamos en una sola columna final (en R): 
+
 #### *Los ID de estas dataframes son una concatenación de el id de entidad, que continene 2 dígitos, el id de municipio que contiene 3 dígitos y el id de localidad que contiene 4 dígitos. estas columnas ya estaban con este formato, más adelante se muestra la función para crear este ID compuesto para los datos del 2020*
 
 ````R
@@ -147,13 +150,14 @@ df_2010['id_est_mun_loc'] = df_2010['id_est_mun_loc'].astype(str)
 df_2010['id_est_mun_loc'] = df_2010.id_est_mun_loc.apply('{:0>9}'.format)
 
 df_2010 = df_2010.set_index('id_est_mun_loc', drop= True)
-df_2010.dtypes
+
+# y guardamos
 
 df_2010.to_csv('datos_2010_arreglados.csv')
 
 ````
 
-### Importamos los datos del 2020 ya que fueron publicados a la mitad del curso (Python):
+### Importamos los datos del 2020. Estos se procesaron después ya que fueron publicados a la mitad del curso (Python):
 
 ````Python
 
@@ -171,7 +175,7 @@ df_2020['id_est_mun_loc'] = df_2020['ENTIDAD'].map(str) + df_2020['MUN'].map(str
 
 df_2020 = df_2020.set_index('id_est_mun_loc', drop=True)
 
-# Limpiamops los datos que contiene valores de resumen general y no datos de localidad: 
+# Limpiamos los datos que contiene valores de resumenes generales y no datos de localidad: 
 
 df_2020_sin_resumen = df_2020[~df_2020['ENTIDAD'].str.contains('00')] 
 df_2020_sin_resumen = df_2020_sin_resumen[~df_2020['MUN'].str.contains('000')]
@@ -179,7 +183,7 @@ df_2020_sin_resumen = df_2020_sin_resumen[~df_2020['LOC'].str.contains('0000')]
 df_2020_sin_resumen = df_2020_sin_resumen[~df_2020['LOC'].str.contains('9999')]
 df_2020_sin_resumen = df_2020_sin_resumen[~df_2020['LOC'].str.contains('9998')]
 
-# seleccionamos sólamente las columnas necesarias y quitamos los * que se usaron como null en los datos vírgenes
+# seleccionamos sólamente las columnas necesarias y reemplazamos los * con nulos, ya que INEGI usa esto como nulo en los datos vírgenes:
 
 df_2020_sin_resumen_select = df_2020_sin_resumen[['LONGITUD','LATITUD','ALTITUD','POBTOT',
                                                   'VIVTOT','VIVPAR_HAB','PRO_OCUP_C','P3YM_HLI',
@@ -222,8 +226,7 @@ df_2020_sin_resumen_select_sin_null_float.dtypes
 
 ````
 
-
-### Similarmente creamos una función para obtener el porcentaje de casas sin servicio para 2020 en Python (en Python):
+### Similarmente creamos una función para obtener el porcentaje de casas sin servicio para 2020 como se hizo en R (Python):
 
 ````Python
 
@@ -257,7 +260,7 @@ def hacer_porcentajes_simplificado(fraccion,total,df,nombre):
 
 hacer_porcentajes(df['VPH_AGUAFV'], df['VIVPAR_HAB'], df, 'porcentaje_de_casas_sin_agua_2020')
 
-# porcentaje de casas s:
+# porcentaje de casas con hablantes de lenguas indígenas:
 
 hacer_porcentajes_simplificado(df['P3YM_HLI'],df['POBTOT'],df,'porcentaje_de_hablantes_indigena_2020')
 
@@ -270,7 +273,7 @@ hacer_porcentajes_simplificado(df['P3HLINHE'],df['POBTOT'],df,'porcentaje_de_hab
 hacer_porcentajes_simplificado(df['P3HLI_HE'],df['POBTOT'],df,'porcentaje_de_hablantes_bilingues_2020')
 
 ````
-### Ahora Arreglamos los nombres faltantes de las columnas para la tabla del 2020 (Python):
+### Ahora arreglamos los nombres faltantes de las columnas para la tabla del 2020 (Python):
 
 ````Python
 
@@ -304,7 +307,7 @@ nombres_nuevos_2020 = {
 df_2020_final = df_2020_final.rename(columns=nombres_nuevos_2020)
 
 `````
-### Agregamos los datos de rezago social del 2020
+### Agregamos los datos de rezago social del 2020 (Python):
 
 ````Python
 
@@ -324,7 +327,7 @@ rezago_2020 = rezago_2020.rename(columns=nombres_rezago_2020)
 
 ````
 
-### Ahora juntamos las tablas del 2010 y 2020 usando el id de localidad y agregamos las regiones indígenas
+### Ahora juntamos las tablas del 2010 y 2020 usando el id de localidad y agregamos las regiones indígenas (Python):
 
 ````Python
 
@@ -332,7 +335,7 @@ df_2010_2020 = pd.merge(df_2010, df_2020_final, left_index=True, right_index=Tru
 
 region_ind = pd.read_csv('regiones índígenas.csv')
 
-# renombramos la columna del los id y regiín indígena:
+# renombramos la columna del los id y región indígena:
 
 region_ind.id_est_mun_loc.names = ['id_est_mun_loc']
 region_ind = region_ind.rename({'REG_IND': 'region_indigena'}, axis=1)
@@ -434,7 +437,7 @@ boxplot_piso_tierra
 ![](images/viviendas_con_piso_de_tierra_por_region(r).png)
 
 
-*Podemos ver que las tegiones tarahuamras y garn nayar tienen desproporcionadamente menos acceso a agua y al drenaje, al igual que mayor rezago social y casas con piso de tierra*
+*Podemos ver que las regiones Tarahuamras y Garn Nayar tienen desproporcionadamente menos acceso a agua y al drenaje, al igual que mayor rezago social y casas con piso de tierra*
 
 ### Ahora veamos la distribución del índice de rezago social del 2010 al 2020 (Python):
 
@@ -456,9 +459,9 @@ plt.ylabel('Densidad', size=16, family='monospace')
 ````
 ![](images/dist_indice_2010_2020.png)
 
-*Podemos ver que aumentó la cantidad de viviendas en un grado de rezago medio, al igual que aumntó la cola superior (mas localidades con menos srevicios, y decreció la cola inferior, o se redujeron el número de localidades con muy poco rezago. Esto indica que ¨empeoró¨ el rezago social en méxico*
+*Podemos ver que aumentó la cantidad de viviendas en un grado de rezago medio, al igual que aumntó la cola superior (mas localidades con menos servicios, y decreció la cola inferior, o se redujeron el número de localidades con muy poco rezago. Esto indica que ¨empeoró¨ el rezago social en méxico*
 
-### Veamos la diferencia del rezago social del 2010 al 2020 por región indígena:
+### Veamos la diferencia del rezago social del 2010 al 2020 por región indígena (Python):
 
 ````Python
 
@@ -489,9 +492,9 @@ plt.title('Cambio en el Índice de Rezago del 2010 al 2020\n por Región Indíge
 ````
 ![](images/cambio_indice_2010_2020_(py).png)
 
-*aguí podemos ver que hubo más diferencia positiva (refiriendise a que aumentó) que negativo (decreció el rezago). Las mas afectadas son Tarahumara y Gran nayar, mientras que las localidades no indígenas tuvieron un aumento muy pequeño. Ottras regiones como LoscNáhuas de Veracrúz y Valles Centrales, decreció significativamente el rezago.*
+*Aquí podemos ver que hubo más diferencia positiva (refiriendise a que aumentó) que negativo (decreció el rezago). Las más afectadas son Tarahumara y Gran nayar, mientras que las localidades no indígenas tuvieron un aumento muy pequeño. Otras regiones como Náhuas de Veracrúz y Valles Centrales, el rezago decreció significativamente.*
 
-### Ahora, esta métrica de la diferencia de rezago del 2010 al 2020 nos va a servir más adelante para icluir la diferncia para seleccionar las localidades más vulnerables, así que se la aplicamos a todos nuestros registros: 
+### Ahora, esta métrica de la diferencia de rezago del 2010 al 2020 nos va a servir más adelante para incluir la diferncia para seleccionar las localidades más vulnerables, así que se la aplicamos a todos nuestros registros (Python): 
 
 ````Python 
 
@@ -499,7 +502,7 @@ df_2010_2020_reg['diferencia_rezago'] = (df_2010_2020_reg['indice_de_rezago_soci
 
 ````
 
-### Ahora vemos el número de personas nuevas en rezago muy alto y alto: 
+### Ahora vemos el número de personas nuevas en rezago muy alto y alto (Python): 
 
 ````Python 
 rezago_muy_alto_2010 = df_2010_2020_reg[df_2010_2020_reg['grado_de_rezago_social_2010'] == 'Muy alto']
@@ -526,14 +529,14 @@ aumentó en un {porcentaje_de_cambio_alto}% en 2020, con {pob_rezago_alto_2020} 
 output:
 
 ````
-> La población en grado de rezago social muy alto en 2010 era 140476 y 
+La población en grado de rezago social muy alto en 2010 era 140476 y 
 aumentó en un 158.4% en 2020, con 362962 en esta categoría
 
-> Similarmente, la población en grado de rezago social alto en 2010 era 1721015 y 
+Similarmente, la población en grado de rezago social alto en 2010 era 1721015 y 
 aumentó en un 115.3% en 2020, con 3705725 en esta categoría
 ````
 
-### Ahora veamos la distribución de hablantes de lenguas indígenas por nivel de rezago social: 
+### Ahora veamos la distribución de hablantes de lenguas indígenas por nivel de rezago social (Python): 
 
 ````Python
 
@@ -552,13 +555,11 @@ plt.title('Porcentaje de personas\n que no hablan español en 2020',
           size=26, family='monospace', weight=900, y=1.1);
 ````
 
-![](images/Porcentaje_ no_español_2020.png)
+![](images/Porcentaje_no_español_2020.png)
 
-*Esta gráfica indica que al incrementar el número de hablantes de alguna lengua indígena, aumenta el porcentaje de gente que no habla españo, al igual que incrementa el número de personas que no habla español al incrementar el nivel de rezago social. Similarmente, ay más localidades con 80% o más de personas que habla lengua indígena en niveles muy altos de rezago social*
+*Esta gráfica indica que al incrementar el número de hablantes de alguna lengua indígena, aumenta el porcentaje de gente que no habla español, al igual que incrementa el número de personas que no habla español al incrementar el nivel de rezago social. Similarmente, hay más localidades con 80% o más de personas que habla lengua indígena en niveles muy altos de rezago social*
 
-
-
-### Ahora veamos que tan bien se correlacionan las vrriables del 2020 entre ellas para usarlas en la clasificación:
+### Ahora veamos que tan bien se correlacionan las variables del 2020 entre ellas para usarlas en la clasificación:
 
 ````Python
 
@@ -585,13 +586,15 @@ plt.title('Correlación entre variables numéricas del 2020',
 
 ![](images/corr_variables_numericas_2020.png)
 
-*podemos ver que todas las variables excepto las geográficas (altitud, longitud y latitud) tienen cierta correlacion linel entre ellas*
+*podemos ver que todas las variables excepto las geográficas (altitud, longitud y latitud) tienen cierta correlacion lineal entre ellas*
 
 ## Parte 2: Seleccionar las comunidades más vulnerables
 
-- Ahora que ya tenemos un entendimiento de los grupos más vulnerables, podemos hacer las preparaciones para seleccionar las comunidades más vulnerables
+## Ahora que ya tenemos un entendimiento de los grupos más vulnerables, podemos hacer las preparaciones para seleccionar las comunidades más vulnerables.
 
-### Seleccionamos a los grupos vulnerables basado en las dos comunidades con mayor falta de servicios, Los Tarahumara y la región del Gran Nayar:
+### Seleccionamos a los grupos vulnerables basado en las dos comunidades con mayor falta de servicios, Los Tarahumara y la región del Gran Nayar, y las comunidades no vulnerables como las localidades no indígenas:
+
+*De aquí en adelante sólo se usó Python*
 
 ````Python 
 
@@ -599,7 +602,7 @@ df_tarahumara = df_2010_2020_reg[df_2010_2020_reg.region_indigena == 'Tarahumara
 df_gran_nayar = df_2010_2020_reg[df_2010_2020_reg.region_indigena == 'Huicot o Gran Nayar']
 df_no_indigena = df_2010_2020_reg[df_2010_2020_reg.region_indigena == 'Localidades no indigenas']
 
-# Le asignamos un 1 a las co,unidades vulnerables y un 0 al resto:
+# Le asignamos un 1 a las comunidades vulnerables y un 0 al resto:
 
 df_tarahumara['comunidad_vulnerable'] = 1
 df_gran_nayar['comunidad_vulnerable'] = 1
@@ -621,9 +624,9 @@ comunidad_vulnerable | comunidad_vulnerable
 0 | 64894
 1 | 2741
 
-*aquí podemos ver que las comunidades no vulnerables estan sobre representadas, casí 30 registros más que las vulnerables. En general esto haría que nuestro algoritmo hsesge los resultados, para nuestro caso, que sólo queremos encontrar las comunidades más vulnerables, nos conviene, así sólo selecciona lo más extremo.*
+*aquí podemos ver que las comunidades no vulnerables estan sobre representadas, casí 30 veces más registros que las vulnerables. En general esto haría que nuestro algoritmo sesge los resultado. Para nuestro caso, que sólo queremos encontrar las comunidades más vulnerables, así que este sesgo nos conviene, selecciona así lo más extremo.*
 
-### Ahora, hagamos una serie de boxplots con varias variables comparando los dos grupos seleccionados, previendo lo que 'vería' el algoritmo para tomar una decisión de si es vulnerable o no. Igual no ayudará a ver si las variables tienen una diferencia estadística suficiente
+### Ahora, hagamos una serie de boxplots con varias variables comparando los dos grupos seleccionados, previendo lo que 'vería' el algoritmo para tomar una decisión de si es vulnerable o no. Igual nos ayuda a visualizar si las variables tienen una diferencia de distribución suficientemente distinta.
 
 ````Python
 
@@ -666,7 +669,7 @@ fig.show()
 
 ![](images/dist_6_variables_vulnerable.png)
 
-*Se puede apreciar que en todas las variables que vamos a usar tienen una distribución distinta, aunque menos marcada en el promedio de ocupantes por cuarto y la diferencia de rezago.*
+*Se puede apreciar que en todas las variables que vamos a usar como vulnerables (Tarahumara y Gran Nayar) tienen una distribución distinta a las no vulnerables (no indígenas), aunque menos marcada en el promedio de ocupantes por cuarto y la diferencia de rezago.*
 
 ### ahora seleccionemos nuestras variables para la predicción y hagamos una matríz de correlación con estos valores:
 
@@ -679,7 +682,7 @@ comunidad_vul_train = comunidad_vul[['promedio_de_ocupantes_por_cuarto_2020',
                                'porcentaje_de_hablantes_indigena_2020', 
                                'diferencia_rezago','comunidad_vulnerable']]
                                
-# ahora checamos que todos sena valores numéricos
+# ahora checamos que todos sena valores numéricos:
 
 comunidad_vul_train.dtypes
 
@@ -708,9 +711,14 @@ plt.title('Correlación entre variables numéricas del 2020\npara la predicción
           size=26, family='monospace', weight=900, y=1.1);
 ````
 ![](images/corr_para_prediccion_2020.png)
+
+
+* podemos ver que al menos sí hay una correlación lineal en varias de las variables, aunque muchas son muy débiles*
+
 ### Bien, ahora separamos nuestra df en x y x, y la dividimos en entrenamiento (70%) y prueba (30%):
 
 ````Python
+
 from sklearn.model_selection import train_test_split
 
 x = comunidad_vul_train.drop(columns=['comunidad_vulnerable'])
@@ -889,7 +897,7 @@ Name: comunidad_vulnerable, dtype: int64
 `````
 *Podemos ver que menos del 10% delas localidades fueron seleccionadas, y es lo que queríamos, que nos diera los casos más extremos.*
 
-### veamos cuantas localidades por región quedaron en nuestra categoría de comunidades vulnerables:
+### Veamos cuantas localidades por región quedaron en nuestra categoría de comunidades vulnerables:
 
 ````Python
 df_2010_2020_reg[df_2010_2020_reg['comunidad_vulnerable']==0].groupby('comunidad_vulnerable')['region_indigena'].value_counts()
@@ -927,3 +935,5 @@ comunidad_vulnerable  region_indigena
 Name: region_indigena, dtype: int64
 `````
 *Podemos ver que siguen habiendo muchas comunidades indíghenas en la predicción, principalmente por la variable de las lenguas indígenas*
+
+### Finalmente podemos usar estos datos para focalizar recursos de algun proyecto social
