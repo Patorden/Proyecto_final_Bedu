@@ -884,6 +884,10 @@ prediccion_localidades_2020_resultado = bosque.predict(prediccion_localidades_20
 
 df_2010_2020_reg['comunidad_vulnerable'] = prediccion_localidades_2020_resultado
 
+# guardamos nuestra Df final: 
+
+df_2010_2020_reg.to_csv('comunidades_vulnerables_seleccionadas.csv')
+
 # vemos cuántas localidades fueron seleccionadas como vulnerables:
 
 df_2010_2020_reg.groupby('comunidad_vulnerable')['comunidad_vulnerable'].value_counts()
