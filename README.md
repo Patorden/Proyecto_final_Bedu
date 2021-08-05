@@ -936,4 +936,4 @@ Name: region_indigena, dtype: int64
 `````
 *Podemos ver que siguen habiendo muchas comunidades indíghenas en la predicción, principalmente por la variable de las lenguas indígenas*
 
-### Finalmente podemos usar estos datos para focalizar recursos de algun proyecto social
+### Finalmente podemos usar estos datos para generar una estrategia de dónde llevar a cabo el proyecto, focalizar recursos y cuantificar el número de personas, localidades, distancias, estados. Igualmente, se necesitaría un filtro más dependiendo del tipo de poryecto, por ejemplo para la instalación de sistemas de captación de agua de lluvia, se puede integrar con sistemas de información geográfica la precipitación media andual en cada localidad. Con esto se pueden seleccionar aquellas localidades que tengan una precipitación mayor a cierto límite para que el proyecto sea existoso. 
