@@ -880,13 +880,13 @@ prediccion_localidades_2020 = df_2010_2020_reg[['promedio_de_ocupantes_por_cuart
 
 prediccion_localidades_2020_resultado = bosque.predict(prediccion_localidades_2020)
 
-# anexamos el resultado como una columna nueva:
+# anexamos el resultado como una columna nueva a nuestros datos originales:
 
-prediccion_localidades_2020['comunidad_vulnerable'] = prediccion_localidades_2020_resultado
+df_2010_2020_reg['comunidad_vulnerable'] = prediccion_localidades_2020_resultado
 
 # vemos cuántas localidades fueron seleccionadas como vulnerables:
 
-prediccion_localidades_2020.groupby('comunidad_vulnerable')['comunidad_vulnerable'].value_counts()
+df_2010_2020_reg.groupby('comunidad_vulnerable')['comunidad_vulnerable'].value_counts()
 ````` 
 output:
 `````
@@ -936,4 +936,28 @@ Name: region_indigena, dtype: int64
 `````
 *Podemos ver que siguen habiendo muchas comunidades indíghenas en la predicción, principalmente por la variable de las lenguas indígenas*
 
-### Finalmente podemos usar estos datos para generar una estrategia de dónde llevar a cabo el proyecto, focalizar recursos y cuantificar el número de personas, localidades, distancias, estados. Igualmente, se necesitaría un filtro más dependiendo del tipo de poryecto, por ejemplo para la instalación de sistemas de captación de agua de lluvia, se puede integrar con sistemas de información geográfica la precipitación media andual en cada localidad. Con esto se pueden seleccionar aquellas localidades que tengan una precipitación mayor a cierto límite para que el proyecto sea existoso. 
+# Podemos ver el número de personas y viviendas totales en las comunidades vulnerables 
+
+````Python
+
+num_per = df_2010_2020_reg['poblacion_total_2020'][df_2010_2020_reg['comunidad_vulnerable'] == 1].sum()
+num_per_tot = df_2010_2020_reg['poblacion_total_2020'].sum()
+
+num_viv = df_2010_2020_reg['viviendas_totales_2020'][df_2010_2020_reg['comunidad_vulnerable'] == 1].sum()
+num_viv_tot = df_2010_2020_reg['viviendas_totales_2020'].sum()
+
+print(f'''En las comunidades seleccionadas como vulnerables hay un total de 
+{num_per} personas que representa el {round((num_per/num_per_tot)*100,1)} del total nacional y un 
+total de {num_viv} viviendas totales que representa el {round((num_viv/num_viv_tot)*100,1)} del total nacional''')
+
+````
+
+Output: 
+
+`````
+En las comunidades seleccionadas como vulnerables hay un total de 
+1514376 personas que representa el 1.2 del total nacional y un 
+total de 460770 viviendas totales que representa el 1.1 del total nacional
+`````
+
+### Finalmente podemos usar estos datos para generar una estrategia de dónde llevar a cabo el proyecto, focalizar recursos y cuantificar el número de personas, localidades, distancias, estados. Igualmente, se necesitaría un filtro más dependiendo del tipo de proyecto, por ejemplo para la instalación de sistemas de captación de agua de lluvia, se puede integrar con sistemas de información geográfica la precipitación media anual en cada localidad. Con esto se pueden seleccionar aquellas localidades que tengan una precipitación mayor a cierto límite para que el proyecto sea existoso. 
